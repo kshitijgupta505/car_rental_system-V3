@@ -1,0 +1,504 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="RKV Car Rental - Rent a car easily and conveniently.">
+        <meta name="keywords" content="Car rental, rent car, SUV, sedan, car booking, car booking system">
+        <meta name="author" content="RKV Car Rental">
+        <title>Car Rental System</title>
+        <style>
+            /* General Styling with RGB Effects */
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+                background: linear-gradient(90deg, rgb(22, 246, 238), rgb(255, 71, 9) 50%, rgb(97, 246, 56));
+                background-size: 300% 300%;
+                animation: gradientShift 10s infinite;
+            }
+
+            @keyframes gradientShift {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+
+            header {
+                background: rgba(0, 0, 0, 0.7);
+                color: white;
+                padding: 20px 0;
+                text-align: center;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+                margin: 10px 0;
+                color: #00ffff;
+                text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+            }
+
+            header .logo img {
+                width: 100px;
+                height: auto;
+            }
+
+            header .header-search input {
+                width: 60%;
+                padding: 10px;
+                font-size: 1rem;
+                border: none;
+                border-radius: 5px;
+                margin-right: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            }
+
+            header .header-search button {
+                padding: 10px 20px;
+                background: rgba(0, 255, 150, 0.8);
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 1rem;
+                transition: background-color 0.5s, transform 0.3s;
+                cursor: pointer;
+            }
+
+            header .header-search button:hover {
+                background: rgba(115, 255, 0, 0.8);
+                transform: scale(1.1);
+            }
+
+            nav {
+                background: rgba(0, 0, 0, 0.7);
+                padding: 15px 0;
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            }
+
+            nav ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            nav ul li a {
+                color: white;
+                font-size: 1.2rem;
+                text-decoration: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                transition: background-color 0.3s, text-shadow 0.3s;
+            }
+
+            nav ul li a:hover {
+                background-color: rgba(60, 255, 0, 0.8);
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+            }
+
+            /* Filter Dropdown in Navigation */
+            .filter-dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .filter-dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: rgba(0, 0, 0, 0.9);
+                min-width: 160px;
+                padding: 10px;
+                z-index: 1;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+            }
+
+            .filter-dropdown:hover .filter-dropdown-content {
+                display: block;
+            }
+
+            .filter-dropdown-content select,
+            .filter-dropdown-content input[type="range"] {
+                width: 100%;
+                padding: 10px;
+                margin: 5px 0;
+                border-radius: 5px;
+                background: rgba(80, 73, 73, 0.9);
+                color: #333;
+            }
+
+            .filter-dropdown-content button {
+                padding: 10px 20px;
+                margin: 10px 0;
+                font-size: 1rem;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                background: rgba(0, 200, 255, 0.8);
+                color: white;
+                transition: transform 0.3s, box-shadow 0.3s;
+            }
+
+            .filter-dropdown-content button:hover {
+                transform: scale(1.1);
+                box-shadow: 0 4px 10px rgba(0, 255, 255, 0.7);
+            }
+
+            /* Filter Modal (Hidden by default) */
+            #filter-container {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(0, 0, 0, 0.9);
+                color: white;
+                padding: 20px;
+                border-radius: 10px;
+                width: 90%;
+                max-width: 500px;
+                z-index: 1000;
+                text-align: center;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            }
+
+            #filter-container h2 {
+                color: rgba(0, 255, 200, 1);
+                margin-bottom: 20px;
+                text-shadow: 0 0 8px rgba(0, 255, 200, 0.8);
+            }
+
+            #filter-container select,
+            #filter-container input[type="range"] {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+                background: rgba(164, 153, 153, 0.9);
+                color: #333;
+            }
+
+            #filter-container button {
+                padding: 10px 20px;
+                margin: 10px 5px;
+                font-size: 1rem;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                background: rgba(0, 200, 255, 0.8);
+                color: white;
+                transition: transform 0.3s, box-shadow 0.3s;
+            }
+
+            #filter-container button:hover {
+                transform: scale(1.1);
+                box-shadow: 0 4px 10px rgba(0, 255, 255, 0.7);
+            }
+
+            /* Car Listing with RGB Effects */
+            .car-row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 20px;
+                gap: 20px;
+                background: rgba(0, 0, 0, 0.6);
+            }
+
+            .car {
+                background: rgba(0, 0, 0, 0.4);
+                border-radius: 10px;
+                padding: 20px;
+                width: 250px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+                transition: transform 0.3s, box-shadow 0.3s;
+                color: #fff;
+            }
+
+            .car img {
+                border-radius: 10px;
+                width: 100%;
+                height: auto;
+                margin-bottom: 15px;
+                transition: transform 0.3s;
+            }
+
+            .car h3 {
+                margin: 15px 0 10px;
+                font-size: 1.5rem;
+                color: rgba(0, 255, 255, 1);
+                text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+            }
+
+            .car p {
+                font-size: 1.2rem;
+                color: rgba(0, 255, 0, 1);
+                margin-bottom: 15px;
+            }
+
+            .car button {
+                padding: 10px 20px;
+                background: rgba(255, 255, 0, 0.8);
+                color: white;
+                font-size: 1rem;
+                border: none;
+                border-radius: 5px;
+                transition: transform 0.3s, box-shadow 0.3s;
+            }
+
+            .car:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 15px rgba(0, 255, 255, 0.6);
+            }
+
+            .car img:hover {
+                transform: scale(1.05);
+            }
+
+            /* Footer */
+            footer {
+                background: rgba(0, 0, 0, 0.9);
+                color: white;
+                padding: 30px 0;
+                font-size: 1rem;
+                box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+            }
+
+            footer .footer-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            footer ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            footer ul li a {
+                color: rgba(0, 255, 255, 0.7);
+                text-decoration: none;
+                font-size: 1.1rem;
+                transition: color 0.3s, text-shadow 0.3s;
+            }
+
+            footer ul li a:hover {
+                color: #00ffff;
+                text-shadow: 0 0 10px rgba(0, 255, 255, 1);
+            }
+
+            /* Mobile responsiveness */
+            @media screen and (max-width: 768px) {
+                nav ul {
+                    flex-direction: column;
+                }
+
+                footer ul {
+                    flex-direction: column;
+                    gap: 15px;
+                }
+
+                .car-row {
+                    flex-direction: column;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-container" style="display: flex; align-items: center; justify-content: space-between; padding: 0 20px;">
+                <div class="logo">
+                    <img src="logo3.png" alt="RKV Car Rental Logo" style="width: 100px; height: auto;">
+                </div>
+                <h1 style="flex: 1; text-align: center; margin: 0; font-size: 2.5rem; color: #00ffff; text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);">
+                    Welcome to RKV Car Rental
+                </h1>
+                <div class="header-search" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="text" placeholder="Search for cars..." style="width: 250px; padding: 10px; font-size: 1rem; border: none; border-radius: 5px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);">
+                    <button style="padding: 10px 20px; background: rgba(0, 255, 150, 0.8); color: white; border: none; border-radius: 5px; font-size: 1rem; transition: background-color 0.5s, transform 0.3s; cursor: pointer;">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Cars</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">login</a></li>
+                <li class="filter-dropdown">
+                    <a href="#">Filters</a>
+                    <div class="filter-dropdown-content">
+                        <select>
+                            <option value="type">Select Car Type</option>
+                            <option value="SUV">SUV</option>
+                            <option value="Sedan">Sedan</option>
+                            <option value="Hatchback">Hatchback</option>
+                        </select>
+                        <input type="range" min="0" max="500" step="10" value="200">
+                        <button>Apply Filters</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="car-row">
+            <div class="car">
+                <img src="Car1.png" alt="Mercedes-Benz AMG GT">
+                <h3>Mercedes-Benz AMG GT</h3>
+                <p>Rent Price per day = 100$</p>
+                <button>Book Now</button>
+            </div>
+            <!-- Car 2 -->
+            <div class="car">
+                <img src="car2.png" alt="Maruti Suzuki Brezza">
+                <h3>Maruti Suzuki Brezza</h3>
+                <p>Rent Price per day = 50$</p>
+                <button>Book Now</button>
+            </div>
+            <!-- Car 3 -->
+            <div class="car">
+                <img src="car3.png" alt="Hyundai Creta">
+                <h3>Hyundai Creta</h3>
+                <p>Rent Price per day = 30$</p>
+                <button>Book Now</button>
+            </div>
+            <!-- Car 4 -->
+            <div class="car">
+                <img src="car4.png" alt="Maruti Suzuki Grand Vitara">
+                <h3>Maruti Suzuki Grand Vitara</h3>
+                <p>Rent Price per day = 35$</p>
+                <button>Book Now</button>
+            </div>
+            <!-- Car 5 -->
+            <div class="car">
+                <img src="car5.png" alt="Mahindra Scorpio">
+                <h3>Mahindra Scorpio</h3>
+                <p>Rent Price per day = 50$</p>
+                <button>Book Now</button>
+            </div>
+            <!-- Car 6 -->
+            <div class="car">
+                <img src="car6.png" alt="Hyundai Venue">
+                <h3>Hyundai Venue</h3>
+                <p>Rent Price per day = 29$</p>
+                <button>Book Now</button>
+            </div>
+            <!-- Car 7 -->
+            <div class="car">
+                <img src="car7.png" alt="Maruti Suzuki Swift">
+                <h3>Maruti Suzuki Swift</h3>
+                <p>Rent Price per day = 20$</p>
+                <button>Book Now</button>
+            </div>
+            <!-- Car 8 -->
+            <div class="car">
+                <img src="car8.png" alt="Hyundai NEW Verna">
+                <h3>Hyundai NEW Verna</h3>
+                <p>Rent Price per day = 45$</p>
+                <button>Book Now</button>
+            </div>
+            <!-- Car 9 -->
+            <div class="car">
+                <img src="car9.png" alt="Maruti Suzuki Baleno">
+                <h3>Maruti Suzuki Baleno</h3>
+                <p>Rent Price per day = 28$</p>
+                <button>Book Now</button>
+            </div>
+            <!-- Car 10 -->
+            <div class="car">
+                <img src="car10.png" alt="Mahindra Thar">
+                <h3>Mahindra Thar</h3>
+                <p>Rent Price per day = 80$</p>
+                <button>Book Now</button>
+            </div>
+
+            <div class="car">
+                <img src="car11.png" alt="Tata Nexon">
+                <h3>Tata Nexon</h3>
+                <p>Rent Price per day = 38$</p>
+                <a href="booking.html"><button>Book Now</button></a>
+            </div>
+            <div class="car">
+                <img src="car12.png" alt="Mahindra XUV700">
+                <h3>Mahindra XUV700</h3>
+                <p>Rent Price per day = 70$</p>
+                <a href="booking.html"><button>Book Now</button></a>
+            </div>
+            <div class="car">
+                <img src="car13.png" alt="Toyota Urban Cruiser Hyryder">
+                <h3>Toyota Urban Cruiser Hyryder</h3>
+                <p>Rent Price per day = 55$</p>
+                <a href="booking.html"><button>Book Now</button></a>
+            </div>
+            <div class="car">
+                <img src="car14.png" alt="Hyundai Grand i10 Nios">
+                <h3>Hyundai Grand i10 Nios</h3>
+                <p>Rent Price per day = 25$</p>
+                <a href="booking.html"><button>Book Now</button></a>
+            </div>
+            <div class="car">
+                <img src="car15.png" alt="Skoda Slavia">
+                <h3>Skoda Slavia</h3>
+                <p>Rent Price per day = 47$</p>
+                <a href="booking.html"><button>Book Now</button></a>
+            </div>
+            <div class="car">
+                <img src="car16.png" alt="Toyota Innova Hycross">
+                <h3>Toyota Innova Hycross</h3>
+                <p>Rent Price per day = 85$</p>
+                <a href="booking.html"><button>Book Now</button></a>
+            </div>
+            <div class="car">
+                <img src="car17.png" alt="Maruti Suzuki Ertiga">
+                <h3>Maruti Suzuki Ertiga</h3>
+                <p>Rent Price per day = 49$</p>
+                <a href="booking.html"><button>Book Now</button></a>
+            </div>
+            <div class="car">
+                <img src="car18.png" alt="Hyundai i20">
+                <h3>Hyundai i20</h3>
+                <p>Rent Price per day = 37$</p>
+                <a href="booking.html"><button>Book Now</button></a>
+            </div>
+            <div class="car">
+                <img src="car19.png" alt="Toyota Fortuner">
+                <h3>Toyota Fortuner</h3>
+                <p>Rent Price per day = 99$</p>
+                <a href="booking.html"><button>Book Now</button></a>
+            </div>
+            <div class="car">
+                <img src="car20.png" alt="Tata Punch">
+                <h3>Tata Punch</h3>
+                <p>Rent Price per day = 65$</p>
+                <a href="booking.html"><button>Book Now</button></a>
+        </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+                <p>&copy; 2024 RKV Car Rental. All rights reserved.</p>
+            </div>
+        </footer>
+    </body>
+    </html>

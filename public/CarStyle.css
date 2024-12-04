@@ -1,0 +1,102 @@
+body {
+	font-family: 'Arial', sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f5f5f5;
+}
+
+header {
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	margin: auto;
+	padding: 10;
+	padding: 20px;
+}
+
+nav {
+	background-color: #333;
+	color: #fff;
+	padding: 10px;
+}
+
+nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: space-around;
+}
+
+nav a {
+	text-decoration: none;
+	color: #fff;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+main {
+	padding: 20px;
+}
+
+section {
+	margin-bottom: 30px;
+}
+
+.car-row {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.car {
+    flex: 20 0 20%; /* Adjust the width of each car to leave space for margins */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px; /* Adjust the border radius as needed */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+    border: 2px solid #333; /* Border color and thickness */
+}
+
+.car:hover {
+    transform: scale(1.05);
+}
+
+.car img {
+    width: 100%;
+    border-radius: 10px; /* Adjust the border radius as needed */
+    border: 2px solid black; /* Border color and thickness for the image */
+    margin-bottom: 10px;
+}
+
+.car h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.car p {
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.car button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+footer {
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	padding: 10px;
+	
+	bottom: 0;
+	width: 100%;
+}

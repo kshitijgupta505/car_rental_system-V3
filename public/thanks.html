@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You for Booking with Us!</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(45deg, #00ff77, #1e90ff, #ffdd00);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Keyframes for dynamic gradient transition */
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            25% {
+                background-position: 100% 50%;
+            }
+
+            50% {
+                background-position: 0% 50%;
+            }
+
+            75% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Container for the content */
+        .container {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            color: #fff;
+            border-radius: 12px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        /* Fade-in animation for container */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        button {
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 20px 0;
+            padding: 10px 20px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        nav {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for nav */
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            color: #00ff77; /* Light green hover effect */
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Thank You for Booking with Us!</h1>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="Car.html">Home</a></li>
+                <li><a href="#">Cars</a></li>
+                <li><a href="https://admin.google.com/u/0/ServiceNotAllowed?service=local&hl=en&pli=1">Locations</a></li>
+                <li><a href="login.html">Login/Logout</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <p>Dear Valued Customer,</p>
+            <p>We would like to express our sincerest thanks for choosing to book with us at our portal. We are thrilled to have the opportunity to provide you with the best possible experience.</p>
+            <p>Our team is dedicated to ensuring that your booking process is as smooth and hassle-free as possible. If you have any questions or concerns about your booking, please do not hesitate to contact us.</p>
+            <p>Thank you again for choosing to book with us. We look forward to serving you and providing you with the best possible service.</p>
+            <a href="Car.html"><button>Return to Homepage</button></a>
+        </main>
+    </div>
+</body>
+
+</html>
